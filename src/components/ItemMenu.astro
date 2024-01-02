@@ -1,32 +1,54 @@
 ---
-const {itemName, svgName, dropdown, children} = Astro.props.data;
+import HomeIcon from "./../icons/Home.astro"
+import WorkspacesIcon from "../icons/Workspaces.astro"
+import UsersIcon from "./../icons/Users.astro"
+import ServicesIcon from "./../icons/Services.astro"
+import ContactsIcon from "./../icons/Contacts.astro"
+import ListIcon from "./../icons/List.astro"
+import ConfigurationIcon from "./../icons/Configuration.astro"
+const {itemName, svgName, href, info, children} = Astro.props.data;
 const hasChildren = Array.isArray(children) && children.length > 0;
 ---
 
 <li>
     <a
         class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 cursor-pointer"
-        aria-controls={hasChildren ? dropdown : ``}
-        data-collapse-toggle={hasChildren ? dropdown : ``}
+        href={href || null}
+        aria-controls={hasChildren ? "dropdown-sidebar-" + itemName : ``}
+        data-collapse-toggle={hasChildren ? "dropdown-sidebar-" + itemName : ``}
     >
-        <svg
-            aria-hidden="true"
-            class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-[#146eab] dark:text-gray-400 dark:group-hover:text-white"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                fill-rule="evenodd"
-                d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                clip-rule="evenodd"></path>
-        </svg>
+        <!-- SVG -->
+        {
+            (function getSVG (name) {
+                switch(name){
+                    case 'home': return <HomeIcon/>;
+                    case 'workspaces': return <WorkspacesIcon/>;
+                    case 'users': return <UsersIcon/>;
+                    case 'services': return <ServicesIcon/>;
+                    case 'contacts': return <ContactsIcon/>;
+                    case 'list': return <ListIcon/>;
+                    case 'configuration': return <ConfigurationIcon/>;
+                }
+            })(svgName)
+        }
+
+        <!-- Item name -->
         <span class="flex-1 ml-3 text-left whitespace-nowrap">{itemName}</span>
+
+        <!-- Info of item -->
+        {
+            !hasChildren && info && 
+            <span
+                class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-300 rounded-full dark:bg-gray-700 dark:text-gray-300"
+            >{info}</span>
+        }
+
+        <!-- Arrow down (svg) -->
         {
             hasChildren &&
             <svg
                 aria-hidden="true"
-                class="w-6 h-6 group-hover:text-[#146eab]"
+                class="w-6 h-6 group-hover:text-[#146eab] dark:group-hover:text-white"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,27 +60,22 @@ const hasChildren = Array.isArray(children) && children.length > 0;
             </svg>
         }
     </a>
-    <ul id={dropdown} class="hidden py-2 space-y-2">
-        <li>
-            <a
-            href="#"
-            class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-            >Settings</a
-            >
-        </li>
-        <li>
-            <a
-            href="#"
-            class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-            >Kanban</a
-            >
-        </li>
-        <li>
-            <a
-            href="#"
-            class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-            >Calendar</a
-            >
-        </li>
-    </ul>
-  </li>
+    <!-- Children -->
+    {
+        hasChildren && 
+        <ul id={"dropdown-sidebar-" + itemName} class="hidden py-2 space-y-2">
+            {
+                children.map(elem => {
+                    return (
+                        <li>
+                            <a
+                            href={elem.href}
+                            class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                            >{elem.childrenName}</a>
+                        </li>
+                    )
+                })
+            }
+        </ul>
+    }
+</li>
