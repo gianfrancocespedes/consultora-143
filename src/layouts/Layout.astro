@@ -14,7 +14,7 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/consultora.jpg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-        <ViewTransitions fallback='none'/>
+        
         <script>
             // On page load or when changing themes, best to add inline in `head` to avoid FOUC
             if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -64,9 +64,10 @@ const { title } = Astro.props;
                 
             });
         </script>
+        <ViewTransitions fallback='none'/>
 	</head>
 	<body>
-        <Sidebar/>
+        <Sidebar transition:persist/>
 		<slot />
         <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
 	</body>

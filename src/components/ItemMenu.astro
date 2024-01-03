@@ -14,8 +14,8 @@ const hasChildren = Array.isArray(children) && children.length > 0;
     <a
         class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 cursor-pointer"
         href={href || null}
-        aria-controls={hasChildren ? "dropdown-sidebar-" + itemName : ``}
-        data-collapse-toggle={hasChildren ? "dropdown-sidebar-" + itemName : ``}
+        aria-controls={hasChildren ? "dropdown-sidebar-" + itemName : null}
+        data-collapse-toggle={hasChildren ? "dropdown-sidebar-" + itemName : null}
     >
         <!-- SVG -->
         {
