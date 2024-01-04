@@ -46,7 +46,7 @@ export const sidebarData = [
     {
         itemName: "Configuración",
         svgName: "configuration",
-        href:"/"
+        href:"/configuration"
     },
 ];
 
