@@ -1,7 +1,60 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TextField from '../components/TextField.astro';
+import SelectField from '../components/SelectField.astro';
+import { students } from '../scripts/forms';
 ---
 
 <Layout title="Consultora 143 - Donde aprender tiene un significado diferente.">
-    
+    <main class="h-screen">
+        <div class="p-4 sm:ml-64 dark:bg-gray-900 h-full overflow-y-auto">
+            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-semibold dark:text-white">
+                    {students[0].subtitle}
+                </h3>
+                <form action="#">
+                    <div class="grid grid-cols-12 gap-6">
+                        {
+                            students[0].fields.map(elem => {
+                                switch(elem.typeInput){
+                                    case 'text' :   return (
+                                                        <TextField data={elem} />
+                                                    )
+                                    case 'select' : return (
+                                                        <SelectField data={elem} />
+                                                    )
+                                }
+                                
+                            })
+                        }
+                        <div class="col-span-12">
+                            <button
+                                class="text-white bg-[#146eab] hover:bg-[#146eab] focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab] dark:focus:ring-primary-800"
+                                type="submit">Registrar estudiante</button
+                            >
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                <h3 class="mb-4 text-xl font-semibold dark:text-white">
+                    {students[1].subtitle}
+                </h3>
+                <form action="#">
+                    <div class="grid grid-cols-12 gap-6">
+                        {
+                            students[1].fields.map(elem => {
+                                switch(elem.typeInput){
+                                    case 'text': return (
+                                                    <TextField data={elem} />
+                                                )
+                                }
+                                
+                            })
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 </Layout>
