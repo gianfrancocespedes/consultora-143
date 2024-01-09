@@ -35,13 +35,19 @@ const { title } = Astro.props;
                     document.documentElement.classList.add('dark');
                 }
             });
+            
+            let theme = getTheme()
+            setTheme(theme)
+            window.localStorage.setItem('theme', theme);
+            console.log(theme)
         
-            window.addEventListener('DOMContentLoaded', function () {
+            /* document.addEventListener('DOMContentLoaded', function () {
                 let theme = getTheme()
                 setTheme(theme)
                 window.localStorage.setItem('theme', theme);
                 console.log(theme)
-            });
+            }); */
+
             document.addEventListener('astro:after-swap', function () {
                 console.log(getTheme());
                 setTheme(getTheme());
@@ -49,7 +55,7 @@ const { title } = Astro.props;
         </script>
 	</head>
 	<body>
-        <Sidebar transition:persist="sidebar"/>
+        <Sidebar/>
 		<slot />
         <Cdn client:load/>
 	</body>
