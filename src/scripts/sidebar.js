@@ -16,7 +16,7 @@ export const sidebarData = [
         children: [
             {
                 childrenName: "Estudiantes",
-                href: "/students",
+                href: "/listStudents",
             },
             {
                 childrenName: "Asesores",

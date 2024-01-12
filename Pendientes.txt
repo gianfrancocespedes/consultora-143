@@ -2,4 +2,4 @@ Lista de pendientes:
 - Hacer que no se muestre el tema claro al inicio de cargar la página (Cuando está en modo oscuro).
 - Formularios de Estudiantes, Asesores y Colaboradores
 - Pantallas de Espacio de trabajo, Servicios, Contactos y Configuración.
-- 
+- Hacer que la barra lateral se aparezca y desaparezca a gusto del usuario.
