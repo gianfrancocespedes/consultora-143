@@ -1,38 +1,35 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-const products = [
+const services = [
     {
-        code        : "E00001",
-        name        : "Gianfranco Moisés Céspedes Francia",
-        dni         : "72363647",
-        telephone   : "987654321",
+        code        : "S00001",
+        studentCode : "E00001",
+        adviserCode : "A00001",
+        serviceType : "Asesoría",
+        serviceStat : "Pendiente de asignar", //Pendiente de asignar - Pendiente - Terminado
+        servicePay  : "Pendiente",
+        urlWp       : "http://whatsapp.com/987654321"
     },
     {
-        code        : "E00002",
-        name        : "Gianfranco Moisés Céspedes Francia",
-        dni         : "71625341",
-        telephone   : "912345678",
+        code        : "S00002",
+        studentCode : "E00002",
+        adviserCode : "A00002",
+        serviceType : "Asesoría",
+        serviceStat : "Pendiente de asignar", //Pendiente de asignar - Pendiente - Terminado
+        servicePay  : "Pendiente",
+        urlWp       : "http://whatsapp.com/987654321"
     },
     {
-        code        : "E00003",
-        name        : "Gianfranco Moisés Céspedes Francia",
-        dni         : "76152431",
-        telephone   : "987634521",
+        code        : "S00003",
+        studentCode : "E00003",
+        adviserCode : "A00003",
+        serviceType : "Asesoría",
+        serviceStat : "Pendiente de asignar", //Pendiente de asignar - Pendiente - Terminado
+        servicePay  : "Pendiente",
+        urlWp       : "http://whatsapp.com/987654321"
     },
-    {
-        code        : "E00004",
-        name        : "Gianfranco Moisés Céspedes Francia",
-        dni         : "79812344",
-        telephone   : "987654321",
-    },
-    {
-        code        : "E00005",
-        name        : "Gianfranco Moisés Céspedes Francia",
-        dni         : "78112345",
-        telephone   : "987654321",
-    },
-]
+];
 ---
 
 <Layout title="Consultora 143 - Donde aprender tiene un significado diferente.">
@@ -105,7 +102,7 @@ const products = [
                                     id="createProductButton"
                                     class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-[#408559] hover:bg-[#408559] focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-[#408559] dark:hover:bg-[#408559] dark:focus:ring-primary-800"
                                     type="button"
-                                    href="/students"
+                                    href="/assignAdvisor"
                                 >
                                     <svg
                                         class="w-5 h-5 mr-2 -ml-1"
@@ -117,7 +114,7 @@ const products = [
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clip-rule="evenodd"></path></svg
                                     >
-                                    Nuevo estudiante
+                                    Nuevo servicio
                                 </a>
                             </div>
                         </div>
@@ -136,10 +133,12 @@ const products = [
                                             {
                                                 [
                                                     'Código',
-                                                    'Nombre',
-                                                    'DNI',
-                                                    'Teléfono',
-                                                    'Acciones',
+                                                    'Estudiante',
+                                                    'Asesor',
+                                                    'Tipo de servicio',
+                                                    'Estado de servicio',
+                                                    'Estado de pago',
+                                                    'Chat de WhatsApp',
                                                 ].map((th) => (
                                                     <th
                                                         scope="col"
@@ -156,68 +155,46 @@ const products = [
                                         class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
                                     >
                                         {
-                                            products.map((product) => (
+                                            services.map((product) => (
                                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         <data value="code">{product.code}</data>
                                                     </td>
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="name">{product.name}</data>
+                                                        <data value="studentCode">{product.studentCode}</data>
                                                     </td>
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="dni">{product.dni}</data>
+                                                        <data value="adviserCode">{product.adviserCode}</data>
                                                     </td>
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="telephone">{product.telephone}</data>
+                                                        <data value="serviceType">{product.serviceType}</data>
                                                     </td>
-                                                    <td class="px-4 py-2 space-x-2 whitespace-nowrap">
-                                                        <button
-                                                            type="button"
-                                                            id="updateProductButton"
-                                                            data-drawer-target="drawer-update-product-default"
-                                                            data-drawer-show="drawer-update-product-default"
-                                                            aria-controls="drawer-update-product-default"
-                                                            data-drawer-placement="right"
-                                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-[#316ff5] hover:bg-[#316ff5] focus:ring-4 focus:ring-primary-300 dark:bg-[#316ff5] dark:hover:bg-[#316ff5] dark:focus:ring-primary-800"
-                                                        >
-                                                            <svg
-                                                                class="w-4 h-4"
-                                                                fill="currentColor"
-                                                                viewBox="0 0 20 20"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                            >
-                                                                <svg>
-                                                                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                                    <path
-                                                                        fill-rule="evenodd"
-                                                                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                                        clip-rule="evenodd"
-                                                                    />
-                                                                </svg>
+                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <data value="serviceStat">
+                                                            {
+                                                                product.serviceStat == "Pendiente de asignar" ?
+                                                                (<img class="inline align-middle" width="30" height="30" src="https://img.icons8.com/color/48/hourglass.png" alt="Pending"/>) :
+                                                                null
+                                                            }
+                                                            <span class="mt-4 align-middle">{product.serviceStat}</span>
+                                                        </data>
+                                                    </td>
+                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <data value="servicePay">
+                                                            {
+                                                                product.servicePay == "Pendiente" ?
+                                                                (<img class="inline align-middle" width="30" height="30" src="https://img.icons8.com/color/48/hourglass.png" alt="Pending"/>) :
+                                                                null
+                                                            }
+                                                            <span class="mt-4 align-middle">{product.servicePay}</span>
+                                                        </data>
+                                                    </td>
+                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <a href={product.urlWp} target="_blank" rel="noopener noreferrer">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
+                                                                <path fill="#fff" d="M4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z"></path><path fill="#fff" d="M4.868,43.803c-0.132,0-0.26-0.052-0.355-0.148c-0.125-0.127-0.174-0.312-0.127-0.483l2.639-9.636c-1.636-2.906-2.499-6.206-2.497-9.556C4.532,13.238,13.273,4.5,24.014,4.5c5.21,0.002,10.105,2.031,13.784,5.713c3.679,3.683,5.704,8.577,5.702,13.781c-0.004,10.741-8.746,19.48-19.486,19.48c-3.189-0.001-6.344-0.788-9.144-2.277l-9.875,2.589C4.953,43.798,4.911,43.803,4.868,43.803z"></path><path fill="#cfd8dc" d="M24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,4C24.014,4,24.014,4,24.014,4C12.998,4,4.032,12.962,4.027,23.979c-0.001,3.367,0.849,6.685,2.461,9.622l-2.585,9.439c-0.094,0.345,0.002,0.713,0.254,0.967c0.19,0.192,0.447,0.297,0.711,0.297c0.085,0,0.17-0.011,0.254-0.033l9.687-2.54c2.828,1.468,5.998,2.243,9.197,2.244c11.024,0,19.99-8.963,19.995-19.98c0.002-5.339-2.075-10.359-5.848-14.135C34.378,6.083,29.357,4.002,24.014,4L24.014,4z"></path><path fill="#40c351" d="M35.176,12.832c-2.98-2.982-6.941-4.625-11.157-4.626c-8.704,0-15.783,7.076-15.787,15.774c-0.001,2.981,0.833,5.883,2.413,8.396l0.376,0.597l-1.595,5.821l5.973-1.566l0.577,0.342c2.422,1.438,5.2,2.198,8.032,2.199h0.006c8.698,0,15.777-7.077,15.78-15.776C39.795,19.778,38.156,15.814,35.176,12.832z"></path><path fill="#fff" fill-rule="evenodd" d="M19.268,16.045c-0.355-0.79-0.729-0.806-1.068-0.82c-0.277-0.012-0.593-0.011-0.909-0.011c-0.316,0-0.83,0.119-1.265,0.594c-0.435,0.475-1.661,1.622-1.661,3.956c0,2.334,1.7,4.59,1.937,4.906c0.237,0.316,3.282,5.259,8.104,7.161c4.007,1.58,4.823,1.266,5.693,1.187c0.87-0.079,2.807-1.147,3.202-2.255c0.395-1.108,0.395-2.057,0.277-2.255c-0.119-0.198-0.435-0.316-0.909-0.554s-2.807-1.385-3.242-1.543c-0.435-0.158-0.751-0.237-1.068,0.238c-0.316,0.474-1.225,1.543-1.502,1.859c-0.277,0.317-0.554,0.357-1.028,0.119c-0.474-0.238-2.002-0.738-3.815-2.354c-1.41-1.257-2.362-2.81-2.639-3.285c-0.277-0.474-0.03-0.731,0.208-0.968c0.213-0.213,0.474-0.554,0.712-0.831c0.237-0.277,0.316-0.475,0.474-0.791c0.158-0.317,0.079-0.594-0.04-0.831C20.612,19.329,19.69,16.983,19.268,16.045z" clip-rule="evenodd"></path>
                                                             </svg>
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            id="deleteProductButton"
-                                                            data-drawer-target="drawer-delete-product-default"
-                                                            data-drawer-show="drawer-delete-product-default"
-                                                            aria-controls="drawer-delete-product-default"
-                                                            data-drawer-placement="right"
-                                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
-                                                        >
-                                                            <svg
-                                                                class="w-4 h-4"
-                                                                fill="currentColor"
-                                                                viewBox="0 0 20 20"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                            >
-                                                                <path
-                                                                    fill-rule="evenodd"
-                                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                                    clip-rule="evenodd"
-                                                                />
-                                                            </svg>
-                                                        </button>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             ))
@@ -233,4 +210,3 @@ const products = [
         </div> 
     </main>
 </Layout>
-

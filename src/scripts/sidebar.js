@@ -31,7 +31,7 @@ export const sidebarData = [
     {
         itemName: "Servicios",
         svgName: "services",
-        href:"/"
+        href:"/listServices"
     },
     {
         itemName: "Contactos",
