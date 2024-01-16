@@ -13,16 +13,6 @@ export const services = [
                 disabled    : true
             },
             {
-                typeInput   : "text",
-                className   : "col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-3",
-                name        : "adviserCode",
-                label       : "Código de asesor",
-                placeholder : "A00001",
-                required    : true,
-                value       : "A00002",
-                disabled    : true
-            },
-            {
                 typeInput   : "select",
                 className   : "col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-3",
                 name        : "type",
@@ -37,7 +27,7 @@ export const services = [
                     {
                         valueElem   : 2,
                         labelElem   : "Elaboración"
-                    }
+                    },
                 ]
             },
             {
@@ -47,6 +37,16 @@ export const services = [
                 label       : "Especificación",
                 placeholder : "",
                 required    : true
+            },
+            {
+                typeInput   : "text",
+                className   : "col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-3",
+                name        : "adviserCode",
+                label       : "Código de asesor",
+                placeholder : "A00001",
+                required    : true,
+                value       : "A00002",
+                disabled    : true
             },
             {
                 typeInput   : "text",
