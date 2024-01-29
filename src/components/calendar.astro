@@ -94,10 +94,17 @@ import Previous from "../icons/Previous.astro";
             calendarGrid.innerHTML = ''; // Limpiar el calendario
 
             let daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            let firstDayOfWeek = new Date(currentYear, currentMonth, 1).getDay();
+
+            // Agregar celdas vacías para los días anteriores al día 1
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                let emptyDayElement = document.createElement('div');
+                //emptyDayElement.className = 'border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-36';
+                calendarGrid.appendChild(emptyDayElement);
+            }
 
             for (let day = 1; day <= daysInMonth; day++) {
-                let date =
-                    `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                let date = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 let asesores = asesoresDisponibilidad[date] || [];
                 let dayElement = document.createElement('div');
                 dayElement.className = 'border border-gray-200 dark:border-gray-700 rounded-lg p-2 min-h-36';
@@ -106,10 +113,7 @@ import Previous from "../icons/Previous.astro";
                 if (asesores.length > 0) {
                     let asesoresElement = document.createElement('div');
                     asesoresElement.className = 'mt-2 overflow-auto max-h-24 calendar-cell';
-                    asesores.forEach(({
-                        nombre,
-                        hora
-                    }) => {
+                    asesores.forEach(({ nombre, hora }) => {
                         let asesorDiv = document.createElement('div');
                         asesorDiv.className = 'text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full px-2 py-1 my-1';
                         asesorDiv.textContent = `${nombre} (${hora})`;
@@ -120,6 +124,7 @@ import Previous from "../icons/Previous.astro";
                 calendarGrid.appendChild(dayElement);
             }
         }
+
 
 
         // Inicialización
