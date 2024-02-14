@@ -1,85 +1,133 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import TextField from '../components/TextField.astro';
-import SelectField from '../components/SelectField.astro';
-import { services } from '../scripts/forms';
+
+const asesores = [
+    {
+        code        : "C00001",
+        name        : "Carlos Andrés Pérez Gómez",
+        email       : "carlos@example.com",
+        telephone   : "987654321",
+        urlWp       : "https://wa.me/987654321",
+    },
+    {
+        code        : "C00002",
+        name        : "José Franco Tapira Mestanza",
+        email       : "jose@example.com",
+        telephone   : "98657324",
+        urlWp       : "https://wa.me/98657324",
+    },
+    {
+        code        : "C00003",
+        name        : "María Fernanda Pérez Gómez",
+        email       : "maria@example.com",
+        telephone   : "987654321",
+        urlWp       : "https://wa.me/987654321",
+    },
+    {
+        code        : "C00004",
+        name        : "Carlos Andrés Pérez Gómez",
+        email       : "carlos@example.com",
+        telephone   : "987654321",
+        urlWp       : "https://wa.me/987654321",
+    },
+]
 ---
 
 <Layout title="Consultora 143 - Donde aprender tiene un significado diferente.">
     <main class="h-screen">
         <div class="p-4 md:ml-64 bg-gray-100 dark:bg-gray-900 h-full overflow-y-auto">
-
-            <!-- Service data -->
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <h3 class="mb-4 text-xl font-semibold dark:text-white">
-                    {services[0].subtitle}
-                </h3>
-                <form action="#">
-                    <div class="grid grid-cols-12 gap-6">
-                        {
-                            services[0].fields.map(elem => {
-                                switch(elem.typeInput){
-                                    case 'text' :   return (
-                                                        <TextField data={elem} />
-                                                    )
-                                    case 'select' : return (
-                                                        <SelectField data={elem} />
-                                                    )
-                                }
-                            })
-                        }
-                        <div class="col-span-12 grid grid-cols-10 gap-4">
-                            <button
-                                class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eabdd] font-medium rounded-lg text-sm px-1 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eabdd]"
-                                type="button">Actualizar datos</button
-                            >
-                            <a
-                                class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eabdd] font-medium rounded-lg text-sm px-1 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eabdd] flex justify-center items-center"
-                                href="/assignAdvisor">Asignar asesor</a
-                            >
-                            <a
-                                class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eabdd] font-medium rounded-lg text-sm px-1 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eabdd] flex justify-center items-center"
-                                href="#">Ver calendario (Asesoría)</a
-                            >
-                            <a
-                                class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eabdd] font-medium rounded-lg text-sm px-1 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eabdd] flex justify-center items-center"
-                                href="#">Ver progreso (Elaboración)</a
-                            >
-                            <a
-                                class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eabdd] font-medium rounded-lg text-sm px-1 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eabdd] flex justify-center items-center"
-                                href="#">Ver pagos</a
-                            >
+                
+                <!-- <h3 class="text-lg font-medium text-gray-900 dark:text-white">Asesores</h3> -->
+                
+                <div class="px-2 bg-white block sm:flex items-center justify-between lg:mt-1.5 dark:bg-gray-800 ">
+                    <div class="w-full mb-1">
+                        <div class="items-center justify-between block sm:flex">
+                            <div class="flex items-center mb-4 sm:mb-0">
+                                <!-- Buscador -->
+                                <form class="sm:pr-3">
+                                    <!-- <label for="products-search" class="sr-only">Search</label> -->
+                                    <div class="relative w-48 mt-1 sm:w-64 xl:w-96">
+                                        <input
+                                            type="text"
+                                            name="buscar"
+                                            id="products-search"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Buscar"
+                                            autocomplete="off"
+                                        />
+                                    </div>
+                                </form>
+                                <!-- Filtro -->
+                                <div class="flex items-center w-full sm:justify-end">
+                                    <div class="flex pl-2 space-x-1">
+                                        <a
+                                            href="#"
+                                            class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        >
+                                            <svg
+                                                class="w-6 h-6"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                ><path
+                                                    fill-rule="evenodd"
+                                                    d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                                                    clip-rule="evenodd"></path></svg
+                                            >
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ml-auto space-x-2 sm:space-x-3">
+                                <!-- Refresh -->
+                                <!-- <button
+                                    type="button"
+                                    data-refresh
+                                    class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                >
+                                    <svg
+                                        class="w-5 h-5 mr-2 -ml-1"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                                        ></path>
+                                    </svg>
+                                    Refresh
+                                </button> -->
+                                <!-- Nuevo colaborador -->
+                                <a
+                                    id="createProductButton"
+                                    class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-[#408559] hover:bg-[#408559dd] sm:w-auto dark:bg-[#408559] dark:hover:bg-[#408559dd]"
+                                    type="button"
+                                    href="/collaborator"
+                                >
+                                    <svg
+                                        class="w-5 h-5 mr-2 -ml-1"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        ><path
+                                            fill-rule="evenodd"
+                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                            clip-rule="evenodd"></path></svg
+                                    >
+                                    Nuevo colaborador
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            <!-- Control data -->
-            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <h3 class="mb-4 text-xl font-semibold dark:text-white">
-                    {services[1].subtitle}
-                </h3>
-                <form action="#">
-                    <div class="grid grid-cols-12 gap-6">
-                        {
-                            services[1].fields.map(elem => {
-                                switch(elem.typeInput){
-                                    case 'text': return (
-                                                    <TextField data={elem} />
-                                                )
-                                }
-                                
-                            })
-                        }
-                    </div>
-                </form>
-            </div>
-
-            <!-- Student data -->
-            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <h3 class="mb-4 text-xl font-semibold dark:text-white">
-                    {services[2].subtitle}
-                </h3>
                 <div class="flex flex-col mt-4">
                     <div class="overflow-x-auto">
                         <div class="inline-block min-w-full align-middle">
@@ -93,7 +141,7 @@ import { services } from '../scripts/forms';
                                                 [
                                                     'Código',
                                                     'Nombre',
-                                                    'DNI',
+                                                    'Email',
                                                     'Teléfono',
                                                     'WhatsApp',
                                                     'Acciones',
@@ -113,25 +161,25 @@ import { services } from '../scripts/forms';
                                         class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
                                     >
                                         {
-                                            services[2].students.map((estudiante) => (
+                                            asesores.map((asesor) => (
                                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="code">{estudiante.code}</data>
+                                                        <data value="code">{asesor.code}</data>
                                                     </td>
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="name">{estudiante.name}</data>
+                                                        <data value="name">{asesor.name}</data>
                                                     </td>
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="dni">{estudiante.dni}</data>
+                                                        <data value="dni">{asesor.email}</data>
                                                     </td>
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="telephone">{estudiante.telephone}</data>
+                                                        <data value="telephone">{asesor.telephone}</data>
                                                     </td>
                                                     <!-- WhatsApp -->
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         <a
                                                             class="inline-flex items-center px-3"
-                                                            href={estudiante.urlWp} target="_blank" rel="noopener noreferrer" class="">
+                                                            href={asesor.urlWp} target="_blank" rel="noopener noreferrer" class="">
                                                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
                                                                 <path fill="#fff" d="M4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z"></path><path fill="#fff" d="M4.868,43.803c-0.132,0-0.26-0.052-0.355-0.148c-0.125-0.127-0.174-0.312-0.127-0.483l2.639-9.636c-1.636-2.906-2.499-6.206-2.497-9.556C4.532,13.238,13.273,4.5,24.014,4.5c5.21,0.002,10.105,2.031,13.784,5.713c3.679,3.683,5.704,8.577,5.702,13.781c-0.004,10.741-8.746,19.48-19.486,19.48c-3.189-0.001-6.344-0.788-9.144-2.277l-9.875,2.589C4.953,43.798,4.911,43.803,4.868,43.803z"></path><path fill="#cfd8dc" d="M24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,4C24.014,4,24.014,4,24.014,4C12.998,4,4.032,12.962,4.027,23.979c-0.001,3.367,0.849,6.685,2.461,9.622l-2.585,9.439c-0.094,0.345,0.002,0.713,0.254,0.967c0.19,0.192,0.447,0.297,0.711,0.297c0.085,0,0.17-0.011,0.254-0.033l9.687-2.54c2.828,1.468,5.998,2.243,9.197,2.244c11.024,0,19.99-8.963,19.995-19.98c0.002-5.339-2.075-10.359-5.848-14.135C34.378,6.083,29.357,4.002,24.014,4L24.014,4z"></path><path fill="#40c351" d="M35.176,12.832c-2.98-2.982-6.941-4.625-11.157-4.626c-8.704,0-15.783,7.076-15.787,15.774c-0.001,2.981,0.833,5.883,2.413,8.396l0.376,0.597l-1.595,5.821l5.973-1.566l0.577,0.342c2.422,1.438,5.2,2.198,8.032,2.199h0.006c8.698,0,15.777-7.077,15.78-15.776C39.795,19.778,38.156,15.814,35.176,12.832z"></path><path fill="#fff" fill-rule="evenodd" d="M19.268,16.045c-0.355-0.79-0.729-0.806-1.068-0.82c-0.277-0.012-0.593-0.011-0.909-0.011c-0.316,0-0.83,0.119-1.265,0.594c-0.435,0.475-1.661,1.622-1.661,3.956c0,2.334,1.7,4.59,1.937,4.906c0.237,0.316,3.282,5.259,8.104,7.161c4.007,1.58,4.823,1.266,5.693,1.187c0.87-0.079,2.807-1.147,3.202-2.255c0.395-1.108,0.395-2.057,0.277-2.255c-0.119-0.198-0.435-0.316-0.909-0.554s-2.807-1.385-3.242-1.543c-0.435-0.158-0.751-0.237-1.068,0.238c-0.316,0.474-1.225,1.543-1.502,1.859c-0.277,0.317-0.554,0.357-1.028,0.119c-0.474-0.238-2.002-0.738-3.815-2.354c-1.41-1.257-2.362-2.81-2.639-3.285c-0.277-0.474-0.03-0.731,0.208-0.968c0.213-0.213,0.474-0.554,0.712-0.831c0.237-0.277,0.316-0.475,0.474-0.791c0.158-0.317,0.079-0.594-0.04-0.831C20.612,19.329,19.69,16.983,19.268,16.045z" clip-rule="evenodd"></path>
                                                             </svg>
@@ -140,7 +188,7 @@ import { services } from '../scripts/forms';
                                                     <!-- Acciones -->
                                                     <td class="px-4 py-2 space-x-2 text-gray-900 whitespace-nowrap dark:text-white">
                                                         <a
-                                                            href="student"
+                                                            href="/collaborator"
                                                             class="inline-flex items-center px-4 py-2  text-center text-gray-900 rounded-lg dark:text-white"
                                                         >
                                                             <svg
@@ -185,26 +233,8 @@ import { services } from '../scripts/forms';
                         </div>
                     </div>
                 </div>
+
             </div>
-            <!-- <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <h3 class="mb-4 text-xl font-semibold dark:text-white">
-                    {services[1].subtitle}
-                </h3>
-                <form action="#">
-                    <div class="grid grid-cols-12 gap-6">
-                        {
-                            services[1].fields.map(elem => {
-                                switch(elem.typeInput){
-                                    case 'text': return (
-                                                    <TextField data={elem} />
-                                                )
-                                }
-                                
-                            })
-                        }
-                    </div>
-                </form>
-            </div> -->
-        </div>
+        </div> 
     </main>
 </Layout>

@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const weekDays = [
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+    'Domingo'
+];
+
+// Función para dar formato a la hora
+function formatHour(hour) {
+    return hour < 10 ? `0${hour}:00` : `${hour}:00`;
+}
+
+const disponibilidades = {
+    adviser_code : 'A00001',
+    adviser_name : 'Juan Pérez',
+    registers    : [
+        {
+            week_day    : 1,
+            hour_start  : 8,
+            hour_end    : 12,
+        },
+        {
+            week_day    : 3,
+            hour_start  : 16,
+            hour_end    : 18,
+        },
+        {
+            week_day    : 3,
+            hour_start  : 18,
+            hour_end    : 20,
+        },
+        {
+            week_day    : 4,
+            hour_start  : 14,
+            hour_end    : 16,
+        },
+        {
+            week_day    : 5,
+            hour_start  : 10,
+            hour_end    : 12,
+        },
+        {
+            week_day    : 6,
+            hour_start  : 8,
+            hour_end    : 12,
+        },
+    ]    
+};
+---
+
+<Layout title="Consultora 143 - Donde aprender tiene un significado diferente.">
+    <main class="h-screen">
+        <div class="p-4 md:ml-64 bg-gray-100 dark:bg-gray-900 h-full overflow-y-auto">
+            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+
+                <h3 class="mb-4 text-xl font-semibold dark:text-white">
+                    Disponibilidad: {disponibilidades.adviser_name} [{disponibilidades.adviser_code}]
+                </h3>
+
+                <div class="flex flex-col pt-4">
+                    <div class="overflow-x-auto">
+                        <div class="inline-block min-w-full align-middle">
+                            <div class="overflow-hidden shadow">
+                                <table
+                                    class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600"
+                                >
+                                    <thead class="bg-gray-100 dark:bg-gray-700">
+                                        <tr>
+                                            {
+                                                [
+                                                    'Día de la semana',
+                                                    'Hora de inicio',
+                                                    'Hora de fin',
+                                                    'Acciones'
+                                                ].map((th) => (
+                                                    <th
+                                                        scope="col"
+                                                        class="p-4 text-xs font-medium text-left text-gray-500 dark:text-gray-400"
+                                                    >
+                                                        {th}
+                                                    </th>
+                                                ))
+                                            }
+                                        </tr>
+                                    </thead>
+
+                                    <tbody
+                                        class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
+                                    >
+                                        {
+                                            disponibilidades.registers.map((disponibilidad) => (
+                                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <data value="week_day">{weekDays[disponibilidad.week_day-1]}</data>
+                                                    </td>
+                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <data value="hour_start">{formatHour(disponibilidad.hour_start)}</data>
+                                                    </td>
+                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <data value="hour_end">{formatHour(disponibilidad.hour_end)}</data>
+                                                    </td>
+                                                    <!-- Acciones -->
+                                                    <td class="px-4 py-2 space-x-2 text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <a
+                                                            href="#"
+                                                            class="inline-flex items-center pl-4 py-2 text-center text-gray-900 rounded-lg dark:text-white"
+                                                        >
+                                                            <svg
+                                                                class="w-4 h-4"
+                                                                fill="currentColor"
+                                                                viewBox="0 0 20 20"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                            >
+                                                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                                                                <path
+                                                                    fill-rule="evenodd"
+                                                                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                                    clip-rule="evenodd"
+                                                                />
+                                                            </svg>
+                                                        </a>
+                                                        <button
+                                                            type="button"
+                                                            id="deleteDisponibility"
+                                                            class="inline-flex items-center pr-4 py-2 text-center text-gray-900 rounded-lg dark:text-white"
+                                                        >
+                                                            <svg
+                                                                class="w-4 h-4"
+                                                                fill="currentColor"
+                                                                viewBox="0 0 20 20"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                            >
+                                                                <path
+                                                                    fill-rule="evenodd"
+                                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                    clip-rule="evenodd"
+                                                                />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-10 gap-4 pt-4">
+                    <button
+                        class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eab] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab]"
+                        type="submit">Añadir disponibilidad</button
+                    >
+                </div>
+
+            </div>
+        </div>
+    </main>
+</Layout>

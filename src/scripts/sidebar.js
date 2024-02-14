@@ -20,11 +20,11 @@ export const sidebarData = [
             },
             {
                 childrenName: "Asesores",
-                href: "/advisers",
+                href: "/listAdvisers",
             },
             {
                 childrenName: "Colaboradores",
-                href: "/collaborators",
+                href: "/listCollaborators",
             },
         ],
     },
