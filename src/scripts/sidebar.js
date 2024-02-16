@@ -7,7 +7,7 @@ export const sidebarData = [
     {
         itemName: "Espacio de trabajo",
         svgName: "workspaces",
-        href:"/",
+        href:"/workspaces",
         info:"3"
     },
     {
@@ -36,12 +36,12 @@ export const sidebarData = [
     {
         itemName: "Contactos",
         svgName: "contacts",
-        href:"/"
+        href:"/test"
     },
     {
         itemName: "Listas",
         svgName: "list",
-        href:"/"
+        href:"/test"
     },
     {
         itemName: "Configuración",

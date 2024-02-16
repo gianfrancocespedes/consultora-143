@@ -4,18 +4,39 @@ import Previous from "../icons/Previous.astro";
 ---
 
 <div class="w-full mx-auto p-4">
-    <h2 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
-        Calendario de Disponibilidad de Asesores
-    </h2>
+
+    <div class="pl-0 bg-white block sm:flex items-center justify-between lg:mt-1.5 dark:bg-gray-800 ">
+        <div class="w-full mb-1">
+            <div class="items-center justify-between block sm:flex">
+                <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
+                    Calendario de Disponibilidad de Asesores
+                </h3>
+
+                <div class="ml-auto space-x-2 sm:space-x-3 mb-3">
+                    <!-- Filtros -->
+                    <a
+                    class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eab] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab]"
+                        type="button"
+                        href="/filtres"
+                    >
+                        Filtros
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="bg-white dark:bg-gray-800 rounded-lg p-2">
         <div class="flex justify-between items-center mb-4">
             <h3 id="monthLabel" class="text-lg font-medium text-gray-700 dark:text-gray-300"></h3>
             <div class="flex space-x-2">
-                <button id="cld-previous" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">
+                <button id="cld-previous" class="px-2 py-1 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">
                     <Previous/>
                 </button>
-                <button id="cld-next" onclick="changeMonth(1)" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">
+                <button id="cld-actual" class="px-2 py-1 text-sm font-medium dark:text-white rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">
+                    Actual
+                </button>
+                <button id="cld-next" onclick="changeMonth(1)" class="px-2 py-1 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600">
                     <Next/>
                 </button>
             </div>
@@ -77,14 +98,18 @@ import Previous from "../icons/Previous.astro";
             // ... más fechas, asesores y horarios
         };
 
-
         // Función para cambiar el mes
         function changeMonth(step) {
-            currentMonth += step;
-            if (currentMonth < 0 || currentMonth > 11) {
-                currentYear += Math.floor(currentMonth / 12);
-                currentMonth %= 12;
-                if (currentMonth < 0) currentMonth += 12;
+            if(step === 0) {
+                currentMonth = new Date().getMonth();
+                currentYear = new Date().getFullYear();
+            } else {
+                currentMonth += step;
+                if (currentMonth < 0 || currentMonth > 11) {
+                    currentYear += Math.floor(currentMonth / 12);
+                    currentMonth %= 12;
+                    if (currentMonth < 0) currentMonth += 12;
+                }
             }
             renderCalendar();
         }
@@ -115,8 +140,9 @@ import Previous from "../icons/Previous.astro";
                     let asesoresElement = document.createElement('div');
                     asesoresElement.className = 'mt-2 overflow-auto max-h-24 calendar-cell';
                     asesores.forEach(({ nombre, hora }) => {
-                        let asesorDiv = document.createElement('div');
-                        asesorDiv.className = 'text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full px-2 py-1 my-1';
+                        let asesorDiv = document.createElement('a');
+                        asesorDiv.href = `/schedule`;
+                        asesorDiv.className = 'block text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full px-2 py-1 my-1';
                         asesorDiv.textContent = `${nombre} (${hora})`;
                         asesoresElement.appendChild(asesorDiv);
                     });
@@ -133,6 +159,10 @@ import Previous from "../icons/Previous.astro";
 
         document.getElementById("cld-previous").addEventListener('click', function () {
             changeMonth(-1);
+        });
+
+        document.getElementById("cld-actual").addEventListener('click', function () {
+            changeMonth(0);
         });
 
         document.getElementById("cld-next").addEventListener('click', function () {

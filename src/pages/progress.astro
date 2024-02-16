@@ -13,49 +13,85 @@ const weekDays = [
 
 // Función para dar formato a la hora considerando si tiene decimal (.25, .5 y .75) o no. Además, añadir si es pm o am
 function formatHour(hour) {
-    let hourInt = Math.floor(hour);
+    const hourInt = Math.floor(hour);
     const hourDec = hour - hourInt;
-    const ampm = hourInt < 12 ? 'am' : 'pm';
-    hourInt = hourInt > 12 ? hourInt - 12 : hourInt;
     const hourStr = hourInt < 10 ? `0${hourInt}` : `${hourInt}`;
     const minStr = hourDec === 0 ? '00' : hourDec === 0.25 ? '15' : hourDec === 0.5 ? '30' : '45';
-    
+    const ampm = hourInt < 12 ? 'am' : 'pm';
     return `${hourStr}:${minStr} ${ampm}`;
 }
 
-const disponibilidades = {
-    adviser_code : 'A00001',
-    adviser_name : 'Juan Pérez',
+/* function formatHour(hour) {
+    return hour < 10 ? `0${hour}:00` : `${hour}:00`;
+} */
+
+// Función para dar formato a la fecha en formato dd-mm-yyyy considerando si es necesario el 0 delante
+function formatDate(day, month, year) {
+    return `${day < 10 ? `0${day}` : day}-${month < 10 ? `0${month}` : month}-${year}`;
+}
+
+const schedule = {
+    service_code : 'S00001',
     registers    : [
         {
-            week_day    : 1,
-            hour_start  : 8,
-            hour_end    : 12,
+            progress_date      : '01-10-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
         },
         {
-            week_day    : 3,
-            hour_start  : 16,
-            hour_end    : 18,
+            progress_date      : '08-10-202',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
         },
         {
-            week_day    : 3,
-            hour_start  : 18,
-            hour_end    : 20,
+            progress_date      : '15-10-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
         },
         {
-            week_day    : 4,
-            hour_start  : 14,
-            hour_end    : 16,
+            progress_date      : '22-10-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
         },
         {
-            week_day    : 5,
-            hour_start  : 10,
-            hour_end    : 12,
+            progress_date      : '29-10-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
         },
         {
-            week_day    : 6,
-            hour_start  : 8,
-            hour_end    : 12,
+            progress_date      : '05-11-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
+        },
+        {
+            progress_date      : '12-11-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
+        },
+        {
+            progress_date      : '19-11-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
+        },
+        {
+            progress_date      : '26-11-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
+        },
+        {
+            progress_date      : '03-12-2021',
+            cost               : 100,
+            elaboration_status : 'PE',
+            payment_status     : 'PE',
         },
     ]    
 };
@@ -67,7 +103,7 @@ const disponibilidades = {
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
 
                 <h3 class="mb-4 text-xl font-semibold dark:text-white">
-                    Disponibilidad: {disponibilidades.adviser_name} [{disponibilidades.adviser_code}]
+                    Cronograma de progreso de elaboración [{schedule.service_code}]
                 </h3>
 
                 <div class="flex flex-col pt-4">
@@ -81,9 +117,10 @@ const disponibilidades = {
                                         <tr>
                                             {
                                                 [
-                                                    'Día de la semana',
-                                                    'Hora de inicio',
-                                                    'Hora de fin',
+                                                    'Fecha',
+                                                    'Costo',
+                                                    'Estado de elaboración',
+                                                    'Estado de pago',
                                                     'Acciones'
                                                 ].map((th) => (
                                                     <th
@@ -101,16 +138,23 @@ const disponibilidades = {
                                         class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
                                     >
                                         {
-                                            disponibilidades.registers.map((disponibilidad) => (
+                                            schedule.registers.map((disponibilidad) => (
                                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                    <!-- Fecha -->
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="week_day">{weekDays[disponibilidad.week_day-1]}</data>
+                                                        <data value="progress_date">{disponibilidad.progress_date}</data>
                                                     </td>
+                                                    <!-- Costo -->
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="hour_start">{formatHour(disponibilidad.hour_start)}</data>
+                                                        <data value="cost">S/ {disponibilidad.cost}</data>
                                                     </td>
+                                                    <!-- Estado de elaboración -->
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="hour_end">{formatHour(disponibilidad.hour_end)}</data>
+                                                        <data value="elaboration_status">{disponibilidad.elaboration_status === 'PE' ? 'Pendiente' : 'Terminado'}</data>
+                                                    </td>
+                                                    <!-- Estado de pago -->
+                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        <data value="payment_status">{disponibilidad.payment_status === 'PE' ? 'Pendiente' : 'Pagado'}</data>
                                                     </td>
                                                     <!-- Acciones -->
                                                     <td class="px-4 py-2 space-x-2 text-gray-900 whitespace-nowrap dark:text-white">
@@ -165,7 +209,15 @@ const disponibilidades = {
                 <div class="grid grid-cols-10 gap-4 pt-4">
                     <button
                         class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eab] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab]"
-                        type="submit">Añadir disponibilidad</button
+                        type="submit">Añadir fecha</button
+                    >
+                    <button
+                        class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eab] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab]"
+                        type="submit">Generar imagen</button
+                    >
+                    <button
+                        class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eab] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab]"
+                        type="submit">Deshacer cronograma</button
                     >
                 </div>
 

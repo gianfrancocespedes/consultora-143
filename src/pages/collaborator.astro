@@ -42,7 +42,7 @@ import { collaborators } from '../scripts/forms';
                         <div class="col-span-12">
                             <button
                                 class="text-white bg-[#146eab] hover:bg-[#146eab] focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab] dark:focus:ring-primary-800"
-                                type="submit">Registrar estudiante</button
+                                type="submit">Registrar colaborador</button
                             >
                         </div>
                     </div>
@@ -67,117 +67,6 @@ import { collaborators } from '../scripts/forms';
                         }
                     </div>
                 </form>
-            </div>
-
-            <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                <h3 class="mb-4 text-xl font-semibold dark:text-white">
-                    {collaborators[2].subtitle}
-                </h3>
-                <div class="flex flex-col mt-4">
-                    <div class="overflow-x-auto">
-                        <div class="inline-block min-w-full align-middle">
-                            <div class="overflow-hidden shadow">
-                                <table
-                                    class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600"
-                                >
-                                    <thead class="bg-gray-100 dark:bg-gray-700">
-                                        <tr>
-                                            {
-                                                [
-                                                    'Código',
-                                                    'Estudiante',
-                                                    'Asesor',
-                                                    'Tipo de servicio',
-                                                    'Estado de servicio',
-                                                    'Estado de pago',
-                                                    'Acciones',
-                                                ].map((th) => (
-                                                    <th
-                                                        scope="col"
-                                                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
-                                                    >
-                                                        {th}
-                                                    </th>
-                                                ))
-                                            }
-                                        </tr>
-                                    </thead>
-
-                                    <tbody
-                                        class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
-                                    >
-                                        {
-                                            collaborators[2].services?.map((service) => (
-                                                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="code">{service.code}</data>
-                                                    </td>
-                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="studentCode">{service.studentCode}</data>
-                                                    </td>
-                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="adviserCode">{service.adviserCode}</data>
-                                                    </td>
-                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="serviceType">{service.serviceType}</data>
-                                                    </td>
-                                                    <!-- Estado de servicio -->
-                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="serviceStat">
-                                                            {
-                                                                service.serviceStat == "Pendiente de asignar" ?
-                                                                (<img class="h-5 w-5 inline align-middle" src="https://img.icons8.com/color/48/hourglass.png" alt="Pending"/>) :
-                                                                null
-                                                            }
-                                                            <span class="mt-4 align-middle">{service.serviceStat}</span>
-                                                        </data>
-                                                    </td>
-                                                    <!-- Estado de pago -->
-                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="servicePay">
-                                                            <!-- {
-                                                                service.servicePay == "Pendiente" ?
-                                                                (<img class="inline align-middle" width="30" height="30" src="https://img.icons8.com/color/48/hourglass.png" alt="Pending"/>) :
-                                                                null
-                                                            } -->
-                                                            <svg class="h-4 w-4 inline align-middle" viewBox="0 0 128 128" aria-hidden="true">
-                                                                <circle cx="63.93" cy="64" r="60" fill="#f2a600"/>
-                                                                <circle cx="60.03" cy="63.1" r="56.1" fill="#ffcc32"/>
-                                                                <path d="M23.93 29.7c4.5-7.1 14.1-13 24.1-14.8c2.5-.4 5-.6 7.1.2c1.6.6 2.9 2.1 2 3.8c-.7 1.4-2.6 2-4.1 2.5a44.64 44.64 0 0 0-23 17.4c-2 3-5 11.3-8.7 9.2c-3.9-2.3-3.1-9.5 2.6-18.3z" fill="#fff170"/>
-                                                            </svg>
-                                                            <span>{service.servicePay}</span>
-                                                        </data>
-                                                    </td>
-                                                    <!-- Acciones -->
-                                                    <td class="px-4 py-2 space-x-2 text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <a
-                                                            href="service"
-                                                            class="inline-flex items-center px-4 py-2  text-center text-gray-900 rounded-lg dark:text-white"
-                                                        >
-                                                            <svg
-                                                                class="w-4 h-4"
-                                                                fill="currentColor"
-                                                                viewBox="0 0 20 20"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                            >
-                                                                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
-                                                                <path
-                                                                    fill-rule="evenodd"
-                                                                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                                                                    clip-rule="evenodd"
-                                                                />
-                                                            </svg>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>

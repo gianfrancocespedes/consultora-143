@@ -1,33 +1,60 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from '../layouts/Layout.astro';
 
-const services = [
+const workspaces = [
     {
-        code        : "S00001",
-        studentCode : "E00001",
-        adviserCode : "A00001",
-        serviceType : "Asesoría",
-        serviceStat : "Pendiente de asignar", //Pendiente de asignar - Pendiente - Terminado
-        servicePay  : "Pendiente",
-        urlWp       : "https://wa.me/987654321",
+        workspace   : 'Administración',
+        type        : 'Caso',   // Caso o Evento
+        title       : 'Título del Caso 1',
+        state       : 'Activo', // Activo o Inactivo
     },
     {
-        code        : "S00002",
-        studentCode : "E00002, E00003",
-        adviserCode : "A00002",
-        serviceType : "Asesoría",
-        serviceStat : "Pendiente de asignar", //Pendiente de asignar - Pendiente - Terminado
-        servicePay  : "Pendiente",
-        urlWp       : "https://wa.me/987654321",
+        workspace   : 'Administración',
+        type        : 'Evento', // Caso o Evento
+        title       : 'Título del Evento 1',
+        state       : 'Activo', // Activo o Inactivo
     },
     {
-        code        : "S00003",
-        studentCode : "E00004",
-        adviserCode : "A00003",
-        serviceType : "Asesoría",
-        serviceStat : "Pendiente de asignar", //Pendiente de asignar - Pendiente - Terminado
-        servicePay  : "Pendiente",
-        urlWp       : "https://wa.me/987654321",
+        workspace   : 'Consultora 143',
+        type        : 'Caso',   // Caso o Evento
+        title       : 'Título del Caso 2',
+        state       : 'Activo', // Activo o Inactivo
+    },
+    {
+        workspace   : 'Consultora 143',
+        type        : 'Evento', // Caso o Evento
+        title       : 'Título del Evento 2',
+        state       : 'Activo', // Activo o Inactivo
+    },
+    {
+        workspace   : 'Operaciones',
+        type        : 'Caso',   // Caso o Evento
+        title       : 'Título del Caso 3',
+        state       : 'Activo', // Activo o Inactivo
+    },
+    {
+        workspace   : 'Operaciones',
+        type        : 'Evento', // Caso o Evento
+        title       : 'Título del Evento 3',
+        state       : 'Activo', // Activo o Inactivo
+    },
+    {
+        workspace   : 'Contabilidad',
+        type        : 'Caso',   // Caso o Evento
+        title       : 'Título del Caso 4',
+        state       : 'Activo', // Activo o Inactivo
+    },
+    {
+        workspace   : 'Contabilidad',
+        type        : 'Evento', // Caso o Evento
+        title       : 'Título del Evento 4',
+        state       : 'Activo', // Activo o Inactivo
+    },
+    {
+        workspace   : 'Personalizado',
+        type        : 'Evento', // Caso o Evento
+        title       : 'Título del Evento 5',
+        state       : 'Activo', // Activo o Inactivo
     },
 ];
 ---
@@ -36,17 +63,17 @@ const services = [
     <main class="h-screen">
         <div class="p-4 md:ml-64 bg-gray-100 dark:bg-gray-900 h-full overflow-y-auto">
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                
-                <h3 class="mb-4 text-xl font-semibold dark:text-white">
-                    Lista de servicios
+
+                <h3 class="text-xl font-semibold dark:text-white">
+                    Espacio de trabajo
                 </h3>
 
-                <div class="pl-0 bg-white block sm:flex items-center justify-between lg:mt-1.5 dark:bg-gray-800 ">
+                <div class="pl-0 bg-white block sm:flex items-center justify-between mt-3 dark:bg-gray-800 ">
                     <div class="w-full mb-1">
                         <div class="items-center justify-between block sm:flex">
                             <div class="flex items-center mb-4 sm:mb-0">
-                                <!-- Barra de búsqueda -->
-                                <form class="sm:pr-3" action="#" method="GET">
+                                <!-- Buscador -->
+                                <form class="sm:pr-3">
                                     <!-- <label for="products-search" class="sr-only">Search</label> -->
                                     <div class="relative w-48 mt-1 sm:w-64 xl:w-96">
                                         <input
@@ -82,33 +109,11 @@ const services = [
                             </div>
 
                             <div class="ml-auto space-x-2 sm:space-x-3">
-                                <!-- <button
-                                    type="button"
-                                    data-refresh
-                                    class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                >
-                                    <svg
-                                        class="w-5 h-5 mr-2 -ml-1"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        aria-hidden="true"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                                        ></path>
-                                    </svg>
-                                    Refresh
-                                </button> -->
+                                <!-- Nuevo caso -->
                                 <a
-                                    id="createProductButton"
                                     class="inline-flex items-center justify-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-[#408559] hover:bg-[#408559dd] sm:w-auto dark:bg-[#408559] dark:hover:bg-[#408559dd]"
                                     type="button"
-                                    href="/newService"
+                                    href="/student"
                                 >
                                     <svg
                                         class="w-5 h-5 mr-2 -ml-1"
@@ -120,14 +125,14 @@ const services = [
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clip-rule="evenodd"></path></svg
                                     >
-                                    Nuevo servicio
+                                    Nuevo caso/evento
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex flex-col mt-4">
+                <div class="flex flex-col pt-4">
                     <div class="overflow-x-auto">
                         <div class="inline-block min-w-full align-middle">
                             <div class="overflow-hidden shadow">
@@ -138,17 +143,15 @@ const services = [
                                         <tr>
                                             {
                                                 [
-                                                    'Código',
-                                                    'Estudiante',
-                                                    'Asesor',
-                                                    'Tipo de servicio',
-                                                    'Estado de servicio',
-                                                    'Estado de pago',
+                                                    'Espacio de trabajo',
+                                                    'Tipo',
+                                                    'Título',
+                                                    'Estado',
                                                     'Acciones',
                                                 ].map((th) => (
                                                     <th
                                                         scope="col"
-                                                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+                                                        class="p-4 text-xs font-medium text-left text-gray-500 dark:text-gray-400"
                                                     >
                                                         {th}
                                                     </th>
@@ -161,52 +164,29 @@ const services = [
                                         class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
                                     >
                                         {
-                                            services.map((service) => (
+                                            workspaces.map((payment) => (
                                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                                    <!-- Espacio de trabajo -->
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="code">{service.code}</data>
+                                                        <data value="workspace">{payment.workspace}</data>
                                                     </td>
+                                                    <!-- Tipo -->
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="studentCode">{service.studentCode}</data>
+                                                        <data value="type">{payment.type}</data>
                                                     </td>
+                                                    <!-- Título -->
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="adviserCode">{service.adviserCode}</data>
+                                                        <data value="title">{payment.title}</data>
                                                     </td>
+                                                    <!-- Estado -->
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="serviceType">{service.serviceType}</data>
-                                                    </td>
-                                                    <!-- Estado de servicio -->
-                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="serviceStat">
-                                                            {
-                                                                service.serviceStat == "Pendiente de asignar" ?
-                                                                (<img class="h-5 w-5 inline align-middle" src="https://img.icons8.com/color/48/hourglass.png" alt="Pending"/>) :
-                                                                null
-                                                            }
-                                                            <span class="mt-4 align-middle">{service.serviceStat}</span>
-                                                        </data>
-                                                    </td>
-                                                    <!-- Estado de pago -->
-                                                    <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        <data value="servicePay">
-                                                            <!-- {
-                                                                service.servicePay == "Pendiente" ?
-                                                                (<img class="inline align-middle" width="30" height="30" src="https://img.icons8.com/color/48/hourglass.png" alt="Pending"/>) :
-                                                                null
-                                                            } -->
-                                                            <svg class="h-4 w-4 inline align-middle" viewBox="0 0 128 128" aria-hidden="true">
-                                                                <circle cx="63.93" cy="64" r="60" fill="#f2a600"/>
-                                                                <circle cx="60.03" cy="63.1" r="56.1" fill="#ffcc32"/>
-                                                                <path d="M23.93 29.7c4.5-7.1 14.1-13 24.1-14.8c2.5-.4 5-.6 7.1.2c1.6.6 2.9 2.1 2 3.8c-.7 1.4-2.6 2-4.1 2.5a44.64 44.64 0 0 0-23 17.4c-2 3-5 11.3-8.7 9.2c-3.9-2.3-3.1-9.5 2.6-18.3z" fill="#fff170"/>
-                                                            </svg>
-                                                            <span>{service.servicePay}</span>
-                                                        </data>
+                                                        <data value="state">{payment.state}</data>
                                                     </td>
                                                     <!-- Acciones -->
                                                     <td class="px-4 py-2 space-x-2 text-gray-900 whitespace-nowrap dark:text-white">
                                                         <a
-                                                            href="service"
-                                                            class="inline-flex items-center px-4 py-2  text-center text-gray-900 rounded-lg dark:text-white"
+                                                            href={payment.type === 'Caso' ? '/case' : '/event'}
+                                                            class="inline-flex items-center pl-4 py-2 text-center text-gray-900 rounded-lg dark:text-white"
                                                         >
                                                             <svg
                                                                 class="w-4 h-4"
@@ -228,12 +208,13 @@ const services = [
                                         }
                                     </tbody>
                                 </table>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-        </div> 
+        </div>
     </main>
 </Layout>

@@ -23,42 +23,23 @@ function formatHour(hour) {
     return `${hourStr}:${minStr} ${ampm}`;
 }
 
-const disponibilidades = {
-    adviser_code : 'A00001',
-    adviser_name : 'Juan Pérez',
-    registers    : [
-        {
-            week_day    : 1,
-            hour_start  : 8,
-            hour_end    : 12,
-        },
-        {
-            week_day    : 3,
-            hour_start  : 16,
-            hour_end    : 18,
-        },
-        {
-            week_day    : 3,
-            hour_start  : 18,
-            hour_end    : 20,
-        },
-        {
-            week_day    : 4,
-            hour_start  : 14,
-            hour_end    : 16,
-        },
-        {
-            week_day    : 5,
-            hour_start  : 10,
-            hour_end    : 12,
-        },
-        {
-            week_day    : 6,
-            hour_start  : 8,
-            hour_end    : 12,
-        },
-    ]    
-};
+const filtres = [
+    {
+        week_day    : 1,
+        hour_start  : 8,
+        hour_end    : 12,
+    },
+    {
+        week_day    : 3,
+        hour_start  : 16,
+        hour_end    : 18,
+    },
+    {
+        week_day    : 5,
+        hour_start  : 18,
+        hour_end    : 20,
+    },
+];
 ---
 
 <Layout title="Consultora 143 - Donde aprender tiene un significado diferente.">
@@ -67,7 +48,7 @@ const disponibilidades = {
             <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
 
                 <h3 class="mb-4 text-xl font-semibold dark:text-white">
-                    Disponibilidad: {disponibilidades.adviser_name} [{disponibilidades.adviser_code}]
+                    Filtro de búsqueda
                 </h3>
 
                 <div class="flex flex-col pt-4">
@@ -101,7 +82,7 @@ const disponibilidades = {
                                         class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"
                                     >
                                         {
-                                            disponibilidades.registers.map((disponibilidad) => (
+                                            filtres.map((disponibilidad) => (
                                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                                     <td class="px-4 py-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                         <data value="week_day">{weekDays[disponibilidad.week_day-1]}</data>
@@ -165,7 +146,12 @@ const disponibilidades = {
                 <div class="grid grid-cols-10 gap-4 pt-4">
                     <button
                         class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eab] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab]"
-                        type="submit">Añadir disponibilidad</button
+                        type="submit">Añadir filtro</button
+                    >
+                    <a
+                        href="/assignAdvisor"
+                        class="col-span-10 sm:col-span-5 md:col-span-2 text-white bg-[#146eab] hover:bg-[#146eab] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-[#146eab] dark:hover:bg-[#146eab]"
+                        type="submit">Guardar cambios</a
                     >
                 </div>
 
